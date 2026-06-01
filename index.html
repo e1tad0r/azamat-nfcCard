@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Azamat | Professional Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --border: #e0e0e6;
+    --accent: #0066ff;
+    --accent2: #7c3aed;
+    --text: #1a1a1f;
+    --muted: #6b6b80;
+    --green: #22c55e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 20% 20%, rgba(0,102,255,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(124,58,237,0.03) 0%, transparent 50%);
+    animation: bgPulse 8s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes bgPulse {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(5deg) scale(1.05); }
+  }
+
+  .container {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lang-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .lang-btn:hover {
+    border-color: var(--accent);
+    background: #f0f8ff;
+  }
+
+  .lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .profile {
+    text-align: center;
+    padding: 48px 0 32px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f0f0f5, #e8e8f0);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(var(--accent), var(--accent2), var(--accent));
+    animation: spin 3s linear infinite;
+    z-index: -1;
+  }
+
+  .avatar-ring::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .nfc-badge {
+    position: absolute;
+    bottom: 0;
+    right: -4px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    padding: 2px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .name {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #0066ff 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+  }
+
+  .title {
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .city {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .city::before {
+    content: '◉';
+    color: var(--green);
+    font-size: 8px;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 0 4px;
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: #2a2a33;
+    border: 1.5px solid #3a3a45;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(0,102,255,0.04), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .link-card:hover::before { transform: translateX(100%); }
+
+  .link-card:hover {
+    border-color: var(--accent);
+    background: #333340;
+    transform: translateX(3px);
+    box-shadow: 0 4px 16px rgba(0,102,255,0.2);
+  }
+
+  .link-card:active {
+    transform: scale(0.98) translateX(2px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .link-card:nth-child(1) { animation-delay: 0.1s; }
+  .link-card:nth-child(2) { animation-delay: 0.15s; }
+  .link-card:nth-child(3) { animation-delay: 0.2s; }
+  .link-card:nth-child(4) { animation-delay: 0.25s; }
+  .link-card:nth-child(5) { animation-delay: 0.3s; }
+  .link-card:nth-child(6) { animation-delay: 0.35s; }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .icon-tg  { background: rgba(41,182,246,0.15); }
+  .icon-ig  { background: rgba(225,48,108,0.15); }
+  .icon-phone { background: rgba(34,197,94,0.15); }
+  .icon-web { background: rgba(0,102,255,0.15); }
+  .icon-location { background: rgba(255,107,107,0.15); }
+
+  .link-text { flex: 1; }
+
+  .link-name {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    color: #ffffff;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .link-sub {
+    font-size: 11px;
+    color: #8888a0;
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    margin-top: 2px;
+    display: block;
+    letter-spacing: 0;
+  }
+
+  .link-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .link-card:hover .link-arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+
+  .card-box {
+    background: #2a2a33;
+    border: 1.5px solid #3a3a45;
+    border-radius: 16px;
+    padding: 18px;
+    animation: fadeUp 0.5s 0.4s ease both;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  .card-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+
+  .card-brands {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .brand {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .brand-visa { background: rgba(0,102,255,0.2); color: #5599ff; }
+  .brand-humo { background: rgba(255,165,0,0.18); color: #ffaa33; }
+
+  .card-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    margin-bottom: 14px;
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .copy-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,102,255,0.3);
+  }
+
+  .copy-btn:active { transform: scale(0.98); }
+
+  .footer {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.5s 0.5s ease both;
+  }
+
+  .footer-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+  }
+
+  .footer-link {
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+  }
+
+  .footer-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn" onclick="toggleLanguage()">
+    <span class="lang-dot"></span>
+    <span id="langText">UZB</span>
+  </button>
+</div>
+
+<div class="container">
+
+  <!-- Profile -->
+  <div class="profile">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar">
+        <img src="logo.jpg" alt="Azamat">
+      </div>
+      <div class="nfc-badge" id="badge">NFC</div>
+    </div>
+    <div class="name">Azamat</div>
+    <div class="title" id="title">Менеджер по продажам</div>
+    <div class="city" id="city">Ташкент · Узбекистан</div>
+  </div>
+
+  <!-- Social Links -->
+  <div class="section-label" id="contactsLabel">Контакты</div>
+  <div class="links">
+
+    <!-- Phone -->
+    <a href="tel:+998" class="link-card">
+      <div class="icon-box icon-phone">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-name" id="phone-name">Позвонить</span>
+        <span class="link-sub" id="phone-sub">Телефон</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <!-- Telegram -->
+    <a href="https://t.me/" class="link-card">
+      <div class="icon-box icon-tg">
+        <!-- Official Telegram logo -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#29B6F6" opacity="0.2"/>
+          <path d="M5.03 11.764l3.926 1.466 1.52 4.885c.098.313.48.434.742.23l2.19-1.768a.549.549 0 0 1 .663-.014l3.952 2.87c.27.197.65.048.722-.278l2.693-12.953c.077-.372-.28-.686-.637-.556L3.34 10.594c-.402.152-.396.72.01.865l1.68.305z" fill="#29B6F6"/>
+          <path d="M8.956 13.23l-.414 3.894c.098.313.48.434.742.23l2.19-1.768-2.518-2.356z" fill="#1976D2" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-name" id="tg-name">Telegram</span>
+        <span class="link-sub" id="tg-sub">Личное сообщение</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/" class="link-card">
+      <div class="icon-box icon-ig">
+        <!-- Official Instagram gradient logo -->
+        <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+              <stop offset="0%" stop-color="#fdf497"/>
+              <stop offset="5%" stop-color="#fdf497"/>
+              <stop offset="45%" stop-color="#fd5949"/>
+              <stop offset="60%" stop-color="#d6249f"/>
+              <stop offset="90%" stop-color="#285AEB"/>
+            </radialGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-grad)"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="1.8"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-name" id="ig-name">Instagram</span>
+        <span class="link-sub" id="ig-sub">Портфолио и фото</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <!-- Website -->
+    <a href="https://" class="link-card">
+      <div class="icon-box icon-web">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0066ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-name" id="web-name">Веб-сайт</span>
+        <span class="link-sub" id="web-sub">Личный сайт</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <!-- Location -->
+    <a href="#" class="link-card">
+      <div class="icon-box icon-location">
+        <svg width="20" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-name" id="location-name">Местоположение</span>
+        <span class="link-sub" id="location-sub">Ташкент, Узбекистан</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- Payment Card -->
+  <div class="section-label" id="cardLabel">Номер карты</div>
+  <div class="card-box">
+    <div class="card-brands">
+      <span class="brand brand-humo">HUMO</span>
+      <span class="brand brand-visa">VISA</span>
+    </div>
+    <div class="card-number">XXXX XXXX XXXX XXXX</div>
+    <button class="copy-btn" onclick="copyCard(this)" id="copyBtn">Копировать номер</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text" id="footerText">Сделано при поддержке</div>
+    <a href="https://yourwebsite.com" class="footer-link" id="footerLink">Официальный каталог</a>
+  </div>
+
+</div>
+
+<script>
+  let currentLang = 'ru';
+
+  const translations = {
+    ru: {
+      badge: 'NFC',
+      title: 'Менеджер по продажам',
+      city: 'Ташкент · Узбекистан',
+      contactsLabel: 'Контакты',
+      phoneName: 'Позвонить',
+      phoneSub: 'Телефон',
+      tgName: 'Telegram',
+      tgSub: 'Личное сообщение',
+      igName: 'Instagram',
+      igSub: 'Портфолио и фото',
+      webName: 'Веб-сайт',
+      webSub: 'Личный сайт',
+      locationName: 'Местоположение',
+      locationSub: 'Ташкент, Узбекистан',
+      cardLabel: 'Номер карты',
+      copyBtn: 'Копировать номер',
+      footerText: 'Сделано при поддержке',
+      footerLink: 'Официальный каталог',
+      // Кнопка показывает КУДА переключится — при RU показываем UZB
+      langBtn: 'UZB'
+    },
+    uz: {
+      badge: 'NFC',
+      title: 'Sotuvlar menejeri',
+      city: "Toshkent · O'zbekiston",
+      contactsLabel: 'Aloqa',
+      phoneName: "Qo'ng'iroq qilish",
+      phoneSub: 'Telefon',
+      tgName: 'Telegram',
+      tgSub: 'Shaxsiy xabar',
+      igName: 'Instagram',
+      igSub: 'Portfolio va suratlar',
+      webName: 'Veb-sayt',
+      webSub: 'Shaxsiy sayt',
+      locationName: 'Joylashuv',
+      locationSub: "Toshkent, O'zbekiston",
+      cardLabel: 'Karta raqami',
+      copyBtn: 'Nusxalash',
+      footerText: "Qo'llab-quvvatlashda amalga oshirildi",
+      footerLink: 'Rasmiy katalog',
+      // При UZ показываем RU — куда переключится
+      langBtn: 'RU'
+    }
+  };
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'ru' ? 'uz' : 'ru';
+    updateLanguage();
+  }
+
+  function updateLanguage() {
+    const lang = translations[currentLang];
+
+    document.getElementById('badge').textContent          = lang.badge;
+    document.getElementById('title').textContent          = lang.title;
+    document.getElementById('city').textContent           = lang.city;
+    document.getElementById('contactsLabel').textContent  = lang.contactsLabel;
+    document.getElementById('phone-name').textContent     = lang.phoneName;
+    document.getElementById('phone-sub').textContent      = lang.phoneSub;
+    document.getElementById('tg-name').textContent        = lang.tgName;
+    document.getElementById('tg-sub').textContent         = lang.tgSub;
+    document.getElementById('ig-name').textContent        = lang.igName;
+    document.getElementById('ig-sub').textContent         = lang.igSub;
+    document.getElementById('web-name').textContent       = lang.webName;
+    document.getElementById('web-sub').textContent        = lang.webSub;
+    document.getElementById('location-name').textContent  = lang.locationName;
+    document.getElementById('location-sub').textContent   = lang.locationSub;
+    document.getElementById('cardLabel').textContent      = lang.cardLabel;
+    document.getElementById('copyBtn').textContent        = lang.copyBtn;
+    document.getElementById('footerText').textContent     = lang.footerText;
+    document.getElementById('footerLink').textContent     = lang.footerLink;
+    // Кнопка всегда показывает ЦЕЛЕВОЙ язык, не текущий
+    document.getElementById('langText').textContent       = lang.langBtn;
+
+    document.documentElement.lang = currentLang;
+  }
+
+  function copyCard(btn) {
+    navigator.clipboard.writeText('XXXXXXXXXXXX').then(() => {
+      const orig = btn.textContent;
+      btn.textContent = currentLang === 'ru' ? '✓ Скопировано!' : '✓ Nusxalandi!';
+      btn.style.background = 'rgba(34,197,94,0.8)';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+      }, 2000);
+    });
+  }
+
+  // Инициализация
+  updateLanguage();
+</script>
+</body>
+</html>
